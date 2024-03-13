@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "da08100a-ff22-4f21-9a38-17235467e5d3",
+		"name": "assignment-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17647214"
+	},
+	"item": [
+		{
+			"name": "[POST] Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"customer_name\": \"Fadlan amrui\",\r\n    \"items\": [\r\n      {\r\n      \"item_code\": 1,\r\n      \"description\": \"Iphome 14 Pro Max\",\r\n      \"Quantity\": 4\r\n    }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8082/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8082/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "[DELETE] Orders",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8082/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "[UPDATE] Orders",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
