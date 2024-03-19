@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Status Generator</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Status Page</h1>
+      <div id="status"></div>
+
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
+        }
+
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 15px;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          margin-top: 10rem;
+        }
+
+        h1 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #333;
+          font-size: 36px;
+          line-height: 1;
+        }
+
+        #status {
+          text-align: center;
+          margin-top: 20px;
+          padding: 10px;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #status p {
+          margin: 10px 0;
+          color: #555;
+          font-size: 24px;
+        }
+
+        .sign-status {
+          display: inline-block;
+          padding: 5px 10px;
+          border-radius: 20px;
+          font-size: 16px;
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-right: 5px;
+        }
+
+        .aman {
+          background-color: #4caf50;
+          color: #fff;
+        }
+
+        .siaga {
+          background-color: #ff9800;
+          color: #fff;
+        }
+
+        .bahaya {
+          background-color: #f44336;
+          color: #fff;
+        }
+      </style>
+    </div>
+    <script>
+      function getStatusData() {
+        fetch("/status")
+          .then((response) => response.json())
+          .then((data) => {
+            let waterStatus = "";
+            let windStatus = "";
+
+            switch (data.status_water) {
+              case "aman":
+                waterStatus = "aman";
+                break;
+              case "siaga":
+                waterStatus = "siaga";
+                break;
+              case "bahaya":
+                waterStatus = "bahaya";
+                break;
+            }
+
+            switch (data.status_wind) {
+              case "aman":
+                windStatus = "aman";
+                break;
+              case "siaga":
+                windStatus = "siaga";
+                break;
+              case "bahaya":
+                windStatus = "bahaya";
+                break;
+            }
+
+            document.getElementById("status").innerHTML = `
+            <p>Value Water: ${data.water} meter <span class="sign-status ${waterStatus}">${data.status_water}</span></p>
+            <p>Value Wind: ${data.wind} m/s <span class="sign-status ${windStatus}">${data.status_wind}</span></p>
+          `;
+          });
+      }
+
+      // refresh every 5 seconds
+      setInterval(getStatusData, 5000);
+
+      // initial load
+      getStatusData();
+    </script>
+  </body>
+</html>
